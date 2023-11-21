@@ -31,7 +31,7 @@ public class SpringSecurity {
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
-                                antMatchers("/lugares/**").permitAll()
+                                .antMatchers("/lugares/**").permitAll()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
@@ -43,7 +43,7 @@ public class SpringSecurity {
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .permitAll()
                 );
-        return http.build();
+        return http
             .and().csrf().disable()
             .build();
     }
