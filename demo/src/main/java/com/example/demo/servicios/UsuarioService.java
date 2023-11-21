@@ -16,7 +16,6 @@ import com.example.demo.repositorios.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-
     private final UsuarioRepository usuarioRepository;
     private RolesRepository rolesRepository;
     private PasswordEncoder passwordEncoder;
