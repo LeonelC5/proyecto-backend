@@ -20,10 +20,6 @@ import jakarta.validation.Valid;
          this.usuarioService = usuarioService;
      }
 
-     @GetMapping
-     public ResponseEntity<List<UsuarioDTO>> obtenerTodosUsuarios() {
-        return ResponseEntity.ok();
-    }
      @PostMapping("/register/save")
      public ResponseEntity<String> registration(@Valid @ModelAttribute("user") UsuarioDTO usuarioDTO,
                                                  BindingResult result) {
