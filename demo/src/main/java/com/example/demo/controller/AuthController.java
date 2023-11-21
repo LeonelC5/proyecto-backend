@@ -21,7 +21,9 @@ import jakarta.validation.Valid;
      }
 
      @GetMapping
-     return ResponseEntity.ok
+     public ResponseEntity<List<UsuarioDTO>> obtenerTodosUsuarios() {
+        return ResponseEntity.ok();
+    }
      @PostMapping("/register/save")
      public ResponseEntity<String> registration(@Valid @ModelAttribute("user") UsuarioDTO usuarioDTO,
                                                  BindingResult result) {
