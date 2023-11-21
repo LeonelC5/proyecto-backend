@@ -24,23 +24,23 @@ public class UsuarioService {
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
-    public Usuario crearUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
-    public List<Usuario> obtenerTodosUsuarios() {
-        return (List<Usuario>) usuarioRepository.findAll();
-    }
-    public Optional<Usuario> obtenerUsuarioPorId(Long id) {
-        return usuarioRepository.findById(id);
-    }
+    //public Usuario crearUsuario(Usuario usuario) {
+    //    return usuarioRepository.save(usuario);
+    //}
+    //public List<Usuario> obtenerTodosUsuarios() {
+    //    return (List<Usuario>) usuarioRepository.findAll();
+    //}
+    //public Optional<Usuario> obtenerUsuarioPorId(Long id) {
+    //    return usuarioRepository.findById(id);
+    //}
 
-    public Usuario actualizarUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
+    //public Usuario actualizarUsuario(Usuario usuario) {
+    //    return usuarioRepository.save(usuario);
+    //}
 
-    public void eliminarUsuario(Long id) {
-        usuarioRepository.deleteById(id);
-    }
+    //public void eliminarUsuario(Long id) {
+    //    usuarioRepository.deleteById(id);
+    //}
 
 
     public UsuarioService(UsuarioRepository usuarioRepository,
