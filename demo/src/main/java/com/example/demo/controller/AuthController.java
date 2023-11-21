@@ -6,8 +6,6 @@ import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import com.example.demo.entidades.Usuario;
 import com.example.demo.entidades.UsuarioDTO;
 import com.example.demo.servicios.UsuarioService;
 
