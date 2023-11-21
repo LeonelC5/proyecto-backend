@@ -6,11 +6,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entidades.UsuarioDTO;
 import com.example.demo.servicios.UsuarioService;
 
 @Controller
+@RequestMapping
 public class AuthController {
     private UsuarioService usuarioService;
 
