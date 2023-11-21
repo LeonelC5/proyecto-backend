@@ -9,7 +9,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUsuario")
+    @Column(name = "idusuario")
     private Long idUsuario;
 
     @Column(name = "nombre")
@@ -35,9 +35,9 @@ public class Usuario {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(
-            name="users_roles",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+        name="users_roles",
+        joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="idUsuario")},
+        inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
     private List<Roles> roles = new ArrayList<>();
 
     public Usuario() {
