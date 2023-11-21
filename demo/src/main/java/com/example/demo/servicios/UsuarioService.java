@@ -16,6 +16,7 @@ import com.example.demo.repositorios.UsuarioRepository;
 
 @Service
 public class UsuarioService {
+
     private final UsuarioRepository usuarioRepository;
     private RolesRepository rolesRepository;
     private PasswordEncoder passwordEncoder;
@@ -23,19 +24,19 @@ public class UsuarioService {
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
-    //public Usuario crearUsuario(Usuario usuario) {
-    //    return usuarioRepository.save(usuario);
-    //}
-    //public List<Usuario> obtenerTodosUsuarios() {
-    //    return (List<Usuario>) usuarioRepository.findAll();
-    //}
-    //public Optional<Usuario> obtenerUsuarioPorId(Long id) {
-    //    return usuarioRepository.findById(id);
-    //}
+    public Usuario crearUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+    public List<Usuario> obtenerTodosUsuarios() {
+        return (List<Usuario>) usuarioRepository.findAll();
+    }
+    public Optional<Usuario> obtenerUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id);
+    }
 
-    //public Usuario actualizarUsuario(Usuario usuario) {
-    //    return usuarioRepository.save(usuario);
-    //}
+    public Usuario actualizarUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
 
     public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
@@ -57,11 +58,11 @@ public class UsuarioService {
         usuario.setCorreo(usuarioDTO.getCorreo());
         usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
 
-        Roles roles = rolesRepository.findByName("ROLE_ADMIN");
-        if (roles == null) {
-            roles = checkRoleExist();
-        }
-        usuario.setRoles(Arrays.asList(roles));
+        // Roles roles = rolesRepository.findByName("ROLE_ADMIN");
+        // if (roles == null) {
+        //     roles = checkRoleExist();
+        // }
+        // usuario.setRoles(Arrays.asList(roles));
         return usuarioRepository.save(usuario);
     }
     public UsuarioDTO actualizarUsuario(UsuarioDTO usuarioDTO) {
@@ -70,7 +71,7 @@ public class UsuarioService {
             Usuario usuario = optionalUsuario.get();
             usuario.setNombre(usuarioDTO.getNombre());
             usuario.setCorreo(usuarioDTO.getCorreo());
-            usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
+            // usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
             usuarioRepository.save(usuario);
             return mapToUsuarioDto(usuario);
         }
@@ -86,14 +87,14 @@ public class UsuarioService {
         Usuario.setNombre(usuarioDTO.getNombre() + " " + usuarioDTO.getApellido());
         Usuario.setCorreo(usuarioDTO.getCorreo());
         // encrypt the password using spring security
-        Usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
+        // Usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
 
-        Roles roles = rolesRepository.findByName("ROLE_ADMIN");
-        if(roles == null){
-            roles = checkRoleExist();
-        }
-        Usuario.setRoles(Arrays.asList(roles));
-        usuarioRepository.save(Usuario);
+        // Roles roles = rolesRepository.findByName("ROLE_ADMIN");
+        // if(roles == null){
+        //     roles = checkRoleExist();
+        // }
+        // Usuario.setRoles(Arrays.asList(roles));
+        // usuarioRepository.save(Usuario);
     }
 
 
@@ -106,11 +107,11 @@ public class UsuarioService {
     }
 
     public List<UsuarioDTO> findAllUsuarios() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
-        return usuarios.stream()
-            .map(this::mapToUsuarioDto)
-            .collect(Collectors.toList());
-        }   
+        List<Usuario> Usuarios = usuarioRepository.findAll();
+        return Usuarios.stream()
+                .map((Usuario) -> mapToUsuarioDto(Usuario))
+                .collect(Collectors.toList());
+    }
 
     private UsuarioDTO mapToUsuarioDto(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
@@ -120,9 +121,9 @@ public class UsuarioService {
         return usuarioDTO;
     }
 
-    private Roles checkRoleExist(){
-        Roles roles = new Roles();
-        roles.setName("ROLE_ADMIN");
-        return rolesRepository.save(roles);
-    }
+    // private Roles checkRoleExist(){
+    //     Roles roles = new Roles();
+    //     roles.setName("ROLE_ADMIN");
+    //     return rolesRepository.save(roles);
+    // }
 }
