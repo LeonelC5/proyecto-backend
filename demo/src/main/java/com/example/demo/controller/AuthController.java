@@ -1,15 +1,14 @@
 package com.example.demo.controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.example.demo.entidades.UsuarioDTO;
 import com.example.demo.servicios.UsuarioService;
-
-import java.util.List;
 
 @Controller
 public class AuthController {
@@ -18,52 +17,27 @@ public class AuthController {
     public AuthController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
-    // handler method to handle home page request
-    @GetMapping("/index")
-    public String home(){
-        return "index";
-    }
 
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model){
-        // create model object to store form data
-        UsuarioDTO user = new UsuarioDTO();
-        model.addAttribute("user", user);
-        return "register";
-    }
-
-    // handler method to handle user registration form submit request
     @PostMapping("/register/save")
-    public String registration(@Valid @ModelAttribute("user") UsuarioDTO usuarioDTO,
-                                BindingResult result,
-                                Model model){
+    public ResponseEntity<String> registration(@Valid @ModelAttribute("user") UsuarioDTO usuarioDTO,
+                                                BindingResult result) {
         UsuarioDTO existingUser = usuarioService.findByEmail(usuarioDTO.getCorreo());
 
-        if(existingUser != null && existingUser.getCorreo() != null && !existingUser.getCorreo().isEmpty()){
-            result.rejectValue("email", null,
-                    "Ya existe una cuenta registrada con el mismo correo");
+        if (existingUser != null && existingUser.getCorreo() != null && !existingUser.getCorreo().isEmpty()) {
+            return ResponseEntity.badRequest().body("Ya existe una cuenta registrada con el mismo correo");
         }
 
-        if(result.hasErrors()){
-            model.addAttribute("user", usuarioDTO);
-            return "/register";
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body("Error en los datos del formulario");
         }
 
         usuarioService.saveUser(usuarioDTO);
-        return "redirect:/register?success";
+        return ResponseEntity.ok("Registro exitoso");
     }
 
-    // handler method to handle list of users
-    @GetMapping("/users")
-    public String users(Model model){
-        List<UsuarioDTO> users = usuarioService.findAllUsuarios();
-        model.addAttribute("users", users);
-        return "users";
-    }
-
-    // handler method to handle login request
-    @GetMapping("/login")
-    public String login(){
-        return "login";
+    // Endpoint para el inicio de sesión
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestParam String correo, @RequestParam String password) {
+        return ResponseEntity.ok("Inicio de sesión exitoso");
     }
 }
