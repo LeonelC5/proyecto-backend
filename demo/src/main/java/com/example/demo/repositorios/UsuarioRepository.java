@@ -11,5 +11,5 @@ import com.example.demo.entidades.UsuarioDTO;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     List<Usuario> findByNombre(String nombre);
     Usuario findByCorreo(String correo);
-    List<UsuarioDTO> findAll();
+    List<Usuario> findAll();
 }
