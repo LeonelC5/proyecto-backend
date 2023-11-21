@@ -106,11 +106,11 @@ public class UsuarioService {
     }
 
     public List<UsuarioDTO> findAllUsuarios() {
-        List<Usuario> Usuarios = usuarioRepository.findAll();
-        return Usuarios.stream()
-                .map((Usuario) -> mapToUsuarioDto(Usuario))
-                .collect(Collectors.toList());
-    }
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        return usuarios.stream()
+            .map(this::mapToUsuarioDto)
+            .collect(Collectors.toList());
+        }   
 
     private UsuarioDTO mapToUsuarioDto(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
