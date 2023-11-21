@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entidades.Roles;
@@ -56,7 +55,6 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setNombre(usuarioDTO.getNombre() + " " + usuarioDTO.getApellido());
         usuario.setCorreo(usuarioDTO.getCorreo());
-        usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
 
         // Roles roles = rolesRepository.findByName("ROLE_ADMIN");
         // if (roles == null) {
@@ -71,7 +69,7 @@ public class UsuarioService {
             Usuario usuario = optionalUsuario.get();
             usuario.setNombre(usuarioDTO.getNombre());
             usuario.setCorreo(usuarioDTO.getCorreo());
-            // usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
+
             usuarioRepository.save(usuario);
             return mapToUsuarioDto(usuario);
         }
