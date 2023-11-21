@@ -31,6 +31,7 @@ public class SpringSecurity {
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
+                                antMatchers("/lugares/**").permitAll()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
@@ -43,6 +44,8 @@ public class SpringSecurity {
                                 .permitAll()
                 );
         return http.build();
+            .and().csrf().disable()
+            .build();
     }
 
     @Autowired
