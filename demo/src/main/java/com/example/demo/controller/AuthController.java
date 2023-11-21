@@ -36,8 +36,8 @@ public class AuthController {
     }
 
     // Endpoint para el inicio de sesión
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String correo, @RequestParam String password) {
-        return ResponseEntity.ok("Inicio de sesión exitoso");
-    }
+      // @PostMapping("/login")
+    // public ResponseEntity<String> login(@RequestParam String correo, @RequestParam String password) {
+    //     return ResponseEntity.ok("Inicio de sesión exitoso");
+    // }
 }
